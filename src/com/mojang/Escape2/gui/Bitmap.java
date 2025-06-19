@@ -1,0 +1,46 @@
+package com.mojang.Escape2.gui;
+
+
+public class Bitmap {
+	
+	public int width;
+	public int height;
+	public int[] pixels;
+	
+	
+	public Bitmap(int width, int height) {
+		
+		this.width = width;
+		this.height = height;
+		pixels = new int[width * height];
+			
+	}
+	
+	public void draw(Bitmap bitmap, int xOffs, int yOffs) {
+		
+		for(int y=0; y < bitmap.height; y++){			
+			int yPix = y + yOffs;			
+			if(yPix<0 || yPix >= height) continue;
+			
+			for(int x=0; x < bitmap.width; x++) {
+				int xPix = x + xOffs;
+				if(xPix<0 || xPix >= width) continue;
+				
+				pixels[xPix + yPix * width] = bitmap.pixels[ x + y * bitmap.width];
+				
+				
+				
+			}
+		}
+		
+		
+		
+		
+		
+		
+	}
+	
+	
+	
+}
+	
