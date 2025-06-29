@@ -94,7 +94,7 @@ public class Escape2Component extends Canvas implements Runnable{
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		game.start();
+		game.start(); //game started
 		
 		
 	}
