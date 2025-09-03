@@ -7,7 +7,6 @@ import javax.swing.JFrame;
 
 public class Escape2Component extends JComponent{
 	
-	
 	private static final int WIDTH = 160;
 	private static final int HEIGHT = 120;
 	private static final int SCALE = 4;
@@ -15,11 +14,31 @@ public class Escape2Component extends JComponent{
 	
 	public Escape2Component() {
 		
-		Dimension size = new Dimension(WIDTH*SCALE, HEIGHT*SCALE);
+		Dimension size = new Dimension(WIDTH*SCALE,HEIGHT*SCALE);
 		setPreferredSize(size);
 		
 		
+		
 	}
+	
+	public void start() {
+		
+		
+		
+	}
+	
+	public void run() {
+		
+		
+		
+	}
+	
+	
+	public void render() {
+		
+		
+	}
+	
 	
 	
 	public static void main(String[] args) {
@@ -32,10 +51,15 @@ public class Escape2Component extends JComponent{
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);		
+		frame.setVisible(true);
+		
+		
 		
 		
 	}
+	
+	
+	
 	
 	
 	
