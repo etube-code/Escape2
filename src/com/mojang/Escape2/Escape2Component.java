@@ -1,11 +1,14 @@
 package com.mojang.Escape2;
 
+import java.awt.Canvas;
 import java.awt.Dimension;
 
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 
-public class Escape2Component extends JComponent{
+public class Escape2Component extends Canvas implements Runnable{
+	
+	private boolean running;
+	private Thread thread;
 	
 	private static final int WIDTH = 160;
 	private static final int HEIGHT = 120;
@@ -23,8 +26,11 @@ public class Escape2Component extends JComponent{
 	
 	public void start() {
 		
-		
-		
+		if(running)return;
+			running = true;
+			thread = new Thread(this);
+			thread.start();
+				
 	}
 	
 	public void run() {
