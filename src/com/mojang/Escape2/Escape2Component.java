@@ -2,13 +2,14 @@ package com.mojang.Escape2;
 
 import java.awt.Canvas;
 import java.awt.Dimension;
+import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
 
 public class Escape2Component extends Canvas implements Runnable{
 	
-	private boolean running;
-	private Thread thread;
+	private static boolean running;
+	private static Thread thread;
 	
 	private static final int WIDTH = 160;
 	private static final int HEIGHT = 120;
@@ -27,21 +28,31 @@ public class Escape2Component extends Canvas implements Runnable{
 	public void start() {
 		
 		if(running)return;
-			running = true;
-			thread = new Thread(this);
-			thread.start();
-				
+		running = true;
+		thread = new Thread(this);
+		thread.start();
+
 	}
 	
 	public void run() {
 		
-		
+		while(running) {
+			
+			render();
+			
+		}
 		
 	}
 	
 	
 	public void render() {
 		
+		BufferStrategy bs = getBufferStrategy();
+			if(bs==null) {
+				createBufferStrategy(3);
+				return;
+				
+			}
 		
 	}
 	
