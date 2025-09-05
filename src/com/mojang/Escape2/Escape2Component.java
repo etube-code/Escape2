@@ -1,29 +1,44 @@
-package com.mojang.Escape2;
+package com.mojang.escape2;
 
 import java.awt.Canvas;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
 
 import javax.swing.JFrame;
 
+import com.mojang.escape2.gui.Screen;
+
 public class Escape2Component extends Canvas implements Runnable{
-	
-	private static boolean running;
-	private static Thread thread;
 	
 	private static final int WIDTH = 160;
 	private static final int HEIGHT = 120;
 	private static final int SCALE = 4;
 	
+	private boolean running;
+	private Thread thread;
+	
+	private Screen screen;
+	private BufferedImage img;
+	private int[] pixels;
 	
 	public Escape2Component() {
 		
-		Dimension size = new Dimension(WIDTH*SCALE,HEIGHT*SCALE);
+		Dimension size = new Dimension(WIDTH*SCALE, HEIGHT*SCALE);
 		setPreferredSize(size);
+		
+
+		
+		screen = new Screen(WIDTH, HEIGHT);
+		img = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB);
+		pixels = ((DataBufferInt) img.getRaster().getDataBuffer()).getData();
 		
 		
 		
 	}
+	
 	
 	public void start() {
 		
@@ -31,8 +46,9 @@ public class Escape2Component extends Canvas implements Runnable{
 		running = true;
 		thread = new Thread(this);
 		thread.start();
-
+	
 	}
+	
 	
 	public void run() {
 		
@@ -42,19 +58,39 @@ public class Escape2Component extends Canvas implements Runnable{
 			
 		}
 		
+		
 	}
 	
 	
 	public void render() {
 		
 		BufferStrategy bs = getBufferStrategy();
-			if(bs==null) {
-				createBufferStrategy(3);
-				return;
-				
-			}
+		
+		if(bs==null) {
+			createBufferStrategy(3);
+			return;
+			
+		}
+		
+		screen.render();
+		
+		for(int i=0; i<WIDTH*HEIGHT;i++) {
+			
+			pixels[i] = screen.pixels[i];
+			
+		}
+		
+		
+		Graphics g = bs.getDrawGraphics();
+		g.drawImage(img, 0, 0,WIDTH*SCALE,HEIGHT*SCALE,null);
+		bs.show();
+		
+		
 		
 	}
+	
+	
+	
 	
 	
 	
@@ -70,21 +106,10 @@ public class Escape2Component extends Canvas implements Runnable{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		
-		
-		
+		game.start();
 		
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 }
